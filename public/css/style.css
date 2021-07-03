@@ -1,0 +1,8 @@
+body {
+    background-color: #142427;
+    color: aliceblue;
+};
+img {
+    display: flex;
+    justify-content: center;
+}
