@@ -1,15 +1,15 @@
 const sequelize = require('../config/connection');
-const { User, Wiki, Favorite } = require('../models');
+const { User, Blog, Comment } = require('../models');
 
 const userData = require('./userSeed.json');
-const wikiData = require('./wikiSeed.json');
-const favoriteData = require('./favoriteSeed.json');
+const blogData = require('./blogSeed.json');
+const commentData = require('./commentSeed.json');
 
 const seedDatabase = () => {
     return sequelize.sync({ force: true }).then(() => {
       User.bulkCreate(userData, { individualHooks: true, returning: true,}).then(() => {
-        Wiki.bulkCreate(wikiData).then(() => {
-            Favorite.bulkCreate(favoriteData).then(() => {
+        Blog.bulkCreate(blogData).then(() => {
+            Comment.bulkCreate(commentData).then(() => {
                 console.log('All Seeds Planted');
               });
             });

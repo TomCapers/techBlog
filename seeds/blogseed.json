@@ -1,0 +1,12 @@
+[
+    {
+       "title": "MVC and Me",
+        "content": "I love MVC, and MVC loves me! What more can I say about Model View Control!",
+        "user_id": "1"
+    },
+    {
+        "title": "MYSQL and Me",
+         "content": "I love mysql, and mysql loves me! What more can I say about relational databases!",
+         "user_id": "2"
+     }
+]
