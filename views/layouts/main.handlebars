@@ -11,7 +11,7 @@
 <body>
 
   <header class="display-flex justify-center align-center">
-     <h1>TechBlog</h1>
+     
     <nav>
       <a href="/">Home</a>
        <!-- Conditionally render login or logout links -->
@@ -22,16 +22,15 @@
         <a href="/login">login</a>
         {{/if}}
     </nav>
-   
-    
+      
     </header>
 
-  <div class="flex-column justify-space-around">
-     
+    <div class="title">
+    <h1>TechBlog</h1>
+    </div>
 
-    
-  
-  
+  <div class="flex-column justify-space-around">
+       
     <main class="container container-fluid mt-5">
       <!-- Render the sub layout -->
       {{{ body }}}

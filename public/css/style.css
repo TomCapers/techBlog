@@ -6,3 +6,17 @@ img {
     display: flex;
     justify-content: center;
 }
+.blog{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+    border-style: solid;
+    border-width: medium;
+    border-color:aliceblue;
+    margin-bottom: 50px;
+}
+.title{
+    margin-left: 50px;
+}
+
