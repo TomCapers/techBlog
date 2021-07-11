@@ -16,21 +16,13 @@ Blog.hasMany(Comment, {
 });
 
 Comment.belongsTo(Blog, {
-    through:{
-        model: Comment,
-        unique: false,
-    },
-    foreignKey: 'blog_id',
-    as: 'user_data'
+     foreignKey: 'blog_id',
+    
 });
 
 Comment.belongsTo(User, {
-    through:{
-        model: Comment,
-        unique: false,
-    },
     foreignKey: 'user_id',
-    as: 'blog_data',
+    
 });
 
 module.exports = { User, Blog, Comment };

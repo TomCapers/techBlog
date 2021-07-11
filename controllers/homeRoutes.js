@@ -6,7 +6,14 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
     try {
        
-        const blogData = await Blog.findAll()
+        const blogData = await Blog.findAll({
+          include: [
+            {
+              model: User,
+              attributes: ['user_name'],
+            },
+          ],
+        });
             
             // JOIN with User, using the Favorite through table
             // include: [{ model: User, through: Comment, as: 'user_data'}],
@@ -29,18 +36,24 @@ router.get('/blog/:id', async (req, res) => {
     try {
         
         const blogData = await Blog.findByPk(req.params.id, {
-                include: [{ model: Comment, 
-                            attributes: ['comment'],
-                          }],
+                include: [
+                          { model: Comment, 
+                            attributes: ['comment', 'blog_id', 'user_id'],
+                          },
+                          {
+                            model: User,
+                            attributes: ['user_name']
+                          },
+                        ],
             });
 
-        const blog = blogData.get({ plain: true });
-            console.log(blog);
+        const blogs = blogData.get({ plain: true });
+            console.log(blogs);
         res.render('comment', {
-          ...blog,
+          ...blogs,
           logged_in: req.session.logged_in
         });
-        // res.status(200).json(blog);
+        // res.status(200).json(blogs);
       } catch (err) {
         res.status(500).json(err);
       }
