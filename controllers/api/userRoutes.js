@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     }
   });
   
-  router.put('/dashboard', async (req, res) => {
+  router.put('/comment', async (req, res) => {
     try {
       const userData = await User.update(req.body, {where: {id: req.session.user_id}} );
   
@@ -28,8 +28,9 @@ router.post('/', async (req, res) => {
 
   router.post('/login', async (req, res) => {
     try {
+      console.log('logging in');
       const userData = await User.findOne({ where: { email: req.body.email } });
-  
+  console.log(userData);
       if (!userData) {
         res
           .status(404)
@@ -54,7 +55,7 @@ router.post('/', async (req, res) => {
       });
   
     } catch (err) {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   });
   

@@ -10,18 +10,24 @@
        <div>
             <h2>{{title}}</h2>
             <p>Created by:
-                {{blog.user_id}}
+                {{blog.user_name}}
             </p>
             <p>On:
                 {{date_created}}
             </p>
          </div>
          <div id="content">
-            <p>{{content}}</p>
+         <a href="/blog/{{blog.id}}">{{content}}</a> |
+        
+        
+            
         </div>     
     </div>
        
     {{/each}}
 
-
+<!-- Render script for logged in users only -->
+    {{!-- {{#if logged_in}}
+    <script src="js/comment.js"></script>
+    {{/if}} --}}
 </div>

@@ -4,12 +4,10 @@
     {{#each blogs as |blog|}}
 
     <li>
-        <p>{{name}}</p>
-        <p>{{description}}</p>
-        <p><a href="category/blog/{{blog.id}}">View</a></p>
-        <button id="rem-com">
-            Remove Comment
-        </button>
+        <p>{{title}}</p>
+        <p>{{content}}</p>
+        <p></p>
+        
     </li>
 
     {{/each}}
@@ -42,7 +40,7 @@
             if (response.ok) {
                 document.location.replace('/dashboard');
             } else {
-                //document.location.replace('/hompage');
+                //document.location.replace('/homepage');
             }
         }
         //document.location.replace('/homepage');
