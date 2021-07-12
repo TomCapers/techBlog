@@ -1,12 +1,14 @@
 const commentForm = async (event) => {
     event.preventDefault();
+    var id = document.location.pathname.split("/");
+    console.log(id);
+    const blog_id = parseInt(id[2])
+    const comment = document.querySelector('#new-comment').value.trim();
 
-    const newComment = document.querySelector('#new-comment').value.trim();
-
-    if (newComment) {
+    if (comment) {
     const response = await fetch('/api/comment', {
       method: 'POST',
-      body: JSON.stringify({comment, blog_id, user_id}),
+      body: JSON.stringify({comment, blog_id}),
       headers: { 'Content-Type': 'application/json' },
     });
   
