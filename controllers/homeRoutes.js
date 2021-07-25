@@ -61,22 +61,23 @@ router.get('/blog/:id', async (req, res) => {
 
 
 // Use withAuth middleware to prevent access to route
-router.get('/comment/:id', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
   try {
     // Find blog and comments
-    const blogData = await Blog.findByPk(req.params.id, {
-      include: [{ model: Comment, 
-                  attributes: ['comment'],
+    const blogData = await Blog.findAll({where: {user_id: req.session.user_id}}, {
+      include: [{ model: User, 
+                  attributes: ['user_name'],
       }],
     });
 
-    const blogs = blogData.get({ plain: true });
-
-    res.render('comment', {
-      ...blog,
+    const blogs = blogData.map((blog) => blog.get({plain: true}));
+    console.log(blogs);
+    res.render('dashboard', {
+      test: "Hello",
+      ...blogs,
       logged_in: true
     });
-    //res.status(200).json(user);
+    // res.status(200).json(blogs);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -85,7 +86,7 @@ router.get('/comment/:id', withAuth, async (req, res) => {
   router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
-      res.redirect('/comment'); //do we have dashboard ??
+      res.redirect('/dashboard'); //do we have dashboard ??
       return;
     }
   
