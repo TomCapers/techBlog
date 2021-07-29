@@ -66,7 +66,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     // Find blog and comments
     const blogData = await Blog.findAll({where: {user_id: req.session.user_id}}, {
       include: [{ model: User, 
-                  attributes: ['user_name'],
+                  attributes: ['user_name', 'user_id'],
       }],
     });
 
@@ -75,7 +75,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     res.render('dashboard', {
       test: "Hello",
       blogs: blogs,
-      
+
       logged_in: true
     });
     // res.status(200).json(blogs);

@@ -6,6 +6,7 @@ const newBlogHandler = async (event) => {
     
   
     if (title && content) {
+     
       const response = await fetch(`/api/blog`, {
         method: 'POST',
         body: JSON.stringify({title, content}),
@@ -15,7 +16,7 @@ const newBlogHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.reload();
+        document.location.reload(); 
       } else {
         alert('Failed to create blog');
       }
