@@ -7,7 +7,7 @@ const newBlogHandler = async (event) => {
   
     if (title && content) {
      
-      const response = await fetch(`/api/blog`, {
+      const response = await fetch(`/new-blog`, {
         method: 'POST',
         body: JSON.stringify({title, content}),
         headers: {
