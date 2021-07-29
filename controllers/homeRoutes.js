@@ -75,6 +75,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     res.render('dashboard', {
       test: "Hello",
       blogs: blogs,
+      
       logged_in: true
     });
     // res.status(200).json(blogs);
