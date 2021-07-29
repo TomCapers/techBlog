@@ -2,15 +2,23 @@
      <h1>Your Dashboard</h1>
 </div>
 
-<div class="main-container"></div>
- <div class="card-header col-md-12 blog">    
-     {{#each blogs as |blog|}} 
+<div class="main-container">
+{{#each blogs as |blog|}} 
+ <div class="card-header col-md-12 blog user-blog">    
+     
      <div>
         <h2>{{title}}</h2>
         <p>{{content}}</p>
-     </div>  
-     {{/each}} 
-</div>
+        <button type="click" class="btn btn-sm btn-danger" data-id="{{id}}">DELETE</button>
+     </div>
+  </div>
+      
+        
+  {{/each}}    
+    </div>    
+     
+  
+   
 
 <div class="col-md-6">
     <h3>Add a Blog:</h3>

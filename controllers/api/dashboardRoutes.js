@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../../models/');
 const withAuth = require('../../utils/auth');
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('blog/:id', withAuth, async (req, res) => {
     try {
         const userBlogData = await Blog.destroy({
             where: {
@@ -14,7 +14,9 @@ router.delete('/:id', withAuth, async (req, res) => {
             res.status(404).json({message: 'No blog found with this id!'});
             return;
         }
+        console.log('blog deleted')
         res.status(200).json(userBlogData);
+        
     }catch (err){
         res.status(500).json(err);
     }

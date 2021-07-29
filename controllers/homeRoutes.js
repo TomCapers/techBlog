@@ -84,6 +84,40 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+router.post('/new-blog', async (req, res) => {
+  try {
+    const newBlog = await Blog.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    console.log(newBlog)
+    res.status(200).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.delete('/blog/:id', withAuth, async (req, res) => {
+  try {
+      const userBlogData = await Blog.destroy({
+          where: {
+              id: req.params.id,
+              // user_id: req.session.user_id,
+             
+          }
+      });
+      if (!userBlogData) {
+          res.status(404).json({message: 'No blog found with this id!'});
+          return;
+      }
+      console.log('blog deleted')
+      res.status(200).json(userBlogData);
+      
+  }catch (err){
+      res.status(500).json(err);
+  }
+});
+
   router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route
     if (req.session.logged_in) {
@@ -94,28 +128,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     res.render('login');
   });
 
-//   router.get('/new-blog', (req, res) => {
-//     // If the user is already logged in, redirect the request to another route
-//     if (!req.session.logged_in) {
-//       res.redirect('/comment'); //do we have 'profile' ??
-//       return;
-//     }
   
-//     res.render('postBlog');
-//   });
-
-  router.post('/new-blog', async (req, res) => {
-    try {
-      const newBlog = await Blog.create({
-        ...req.body,
-        user_id: req.session.user_id,
-      });
-      console.log(newBlog)
-      res.status(200).json(newBlog);
-    } catch (err) {
-      res.status(400).json(err);
-    }
-  });
   
   module.exports = router;
   
