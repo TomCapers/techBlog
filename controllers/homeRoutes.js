@@ -102,7 +102,7 @@ router.delete('/blog/:id', withAuth, async (req, res) => {
       const userBlogData = await Blog.destroy({
           where: {
               id: req.params.id,
-              // user_id: req.session.user_id,
+              user_id: req.session.user_id,
              
           }
       });
@@ -117,6 +117,29 @@ router.delete('/blog/:id', withAuth, async (req, res) => {
       res.status(500).json(err);
   }
 });
+
+router.put('/blog/:id', async (req, res) => {
+  try {
+      
+      const blogData = await Blog.update({where: {id: req.params.id}}, {
+              title: req.body.title,
+              content: req.body.content,
+
+          });
+
+      const blogs = blogData.get({ plain: true });
+          console.log(blogs);
+      // res.render('update', {
+      //   blogs,
+      //   logged_in: req.session.logged_in
+      // });
+      res.status(200).json(blogs);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
+
 
   router.get('/login', (req, res) => {
     // If the user is already logged in, redirect the request to another route
