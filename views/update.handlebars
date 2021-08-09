@@ -1,0 +1,44 @@
+<div>
+     <h1>Your Dashboard</h1>
+</div>
+
+{{!-- <div class="main-container">
+
+ <div class="card-header col-md-12 blog user-blog">    
+     
+     <div>
+        <textarea>{{title}}</textarea>
+        <textarea>{{content}}</textarea>
+        <button class="btn btn-sm btn-danger" data-id="{{id}}">DELETE</button>
+     </div>
+  </div>
+      
+        
+     
+</div>  --}}
+
+
+<div class="col-md-6">
+    <h3>Update Your Blog:</h3>
+    <form class="form new-blog-form">
+        <div class="form-group"></div>
+        <label for="blog-title">Blog Title:</label>
+        <textarea style= "width:800px" class="form-input" type="text" id="blog-title" name="blog-title">{{title}}</textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="blog-content">Blog Entry:</label>
+        <textarea style= "width:800px" class="form-input" type="text" id="new-blog" name="new-blog">{{content}}</textarea>
+      </div>
+    <div class="form-group">
+        <button class="btn btn-sm btn-danger" data-id="{{id}}">DELETE</button>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-sm btn-primary" data-id="{{id}}">UPDATE</button>
+      </div>
+    </form>
+    </div>
+
+<!-- Render script for logged in users only -->
+    {{#if logged_in}}
+    <script src="js/blog.js"></script>
+    {{/if}}

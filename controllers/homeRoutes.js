@@ -84,6 +84,33 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+router.get('/dashboard/:id', async (req, res) => {
+  try {
+      
+      const blogData = await Blog.findByPk(req.params.id, {
+              include: [
+                        { model: Comment, 
+                          attributes: ['comment', 'blog_id', 'user_id'],
+                        },
+                        {
+                          model: User,
+                          attributes: ['user_name']
+                        },
+                      ],
+          });
+
+      const blogs = blogData.get({ plain: true });
+          console.log(blogs);
+      res.render('update', {
+        ...blogs,
+        logged_in: req.session.logged_in
+      });
+      // res.status(200).json(blogs);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
 router.post('/new-blog', async (req, res) => {
   try {
     const newBlog = await Blog.create({
